@@ -2,8 +2,13 @@
 #include <GL/freeglut.h>
 #include <GL/freeglut_std.h>
 
+GLuint generic_shader;
+GLuint generic_quad_vbo;
+GLuint generic_quad_ibo;
+
 static void display() {
-  // init_quad();
+  nv_gl_render_clear();
+  draw_quad(generic_shader, generic_quad_vbo, generic_quad_ibo);
   glutSwapBuffers();
 }
 
@@ -18,6 +23,13 @@ int main(int argc, char * argv[]) {
   glutCreateWindow("Draw Quad");
   glutDisplayFunc(display);
   glutIdleFunc(idle);
+
+  // init nv
+  nv_gl_init();
+  nv_gl_set_clear_color(0, 0, 0, 1);
+  generic_shader = nv_gl_compile_generic_shader();
+  init_quad(&generic_quad_vbo, &generic_quad_ibo);
+
   glutMainLoop();
   return 0;
 }
