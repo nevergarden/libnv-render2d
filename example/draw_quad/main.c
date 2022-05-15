@@ -10,12 +10,19 @@ GLuint generic_quad_ibo;
 
 static void display() {
   nv_gl_render_clear();
-  nv_mesh2d_t mesh = {
-    {0.2, -0.5},
-    {0.2, 0.2},
-    0
+  nv_mesh2d_t mesh[2] = {
+    {
+      {0.2, -0.5},
+      {0.2, 0.2},
+      0
+    },
+    {
+      {0.2, 0.5},
+      {0.2, 0.2},
+      0
+    }
   };
-  nv_transform2d(&mesh, 1, &generic_quad_vbo);
+  nv_transform2d(mesh, 2, &generic_quad_vbo);
   draw_quad(generic_shader, generic_quad_vbo, generic_quad_ibo);
   glutSwapBuffers();
 }
