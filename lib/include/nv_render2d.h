@@ -1,5 +1,6 @@
 #ifndef _NV_RENDER2D_H
 #define _NV_RENDER2D_H
+#include "nv_render2d_types.h"
 #include <stdlib.h>
 #include <GL/gl.h>
 
@@ -17,6 +18,6 @@ void nv_gl_set_clear_color(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 void nv_gl_render_clear();
 void nv_gl_init();
 
-void init_quad(GLuint * quad_vbo, GLuint * quad_ibo);
-void draw_quad(GLuint shader, GLuint vbo, GLuint ibo);
+void init_quad(GLuint * quad_vbo);
+void draw_quad(nv_gl_render2d_program_t * program, GLuint vbo);
 #endif

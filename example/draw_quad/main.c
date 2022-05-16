@@ -1,10 +1,11 @@
+#include "nv_render2d_shader.h"
 #include <nv_render2d_types.h>
 #include <nv_transform2d.h>
 #include <nv_render2d.h>
 #include <GL/freeglut.h>
 #include <GL/freeglut_std.h>
 
-GLuint generic_shader;
+nv_gl_render2d_program_t program;
 GLuint generic_quad_vbo;
 GLuint generic_quad_ibo;
 
@@ -23,7 +24,7 @@ static void display() {
     }
   };
   nv_transform2d(mesh, 2, &generic_quad_vbo);
-  draw_quad(generic_shader, generic_quad_vbo, generic_quad_ibo);
+  draw_quad(&program, generic_quad_vbo);
   glutSwapBuffers();
 }
 
@@ -42,8 +43,8 @@ int main(int argc, char * argv[]) {
   // init nv
   nv_gl_init();
   nv_gl_set_clear_color(0, 0, 0, 1);
-  generic_shader = nv_gl_compile_generic_shader();
-  init_quad(&generic_quad_vbo, &generic_quad_ibo);
+  init_quad(&generic_quad_vbo);
+  nv_gl_create_shader_program(&program, nv_generic_quad_shader_vs, nv_generic_quad_shader_fs);
 
   glutMainLoop();
   return 0;
