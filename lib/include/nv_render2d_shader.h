@@ -95,11 +95,14 @@ static const char * nv_generic_quad_shader_fs = "#version 330 core\n"
 "void main() { gl_Color = vec4(1,1,1,1); }";
 
 void nv_gl_create_shader_program(nv_gl_render2d_program_t * program, const char * vertex_shader, const char * fragment_shader) {
+  program->flags = 0;
+  program->vertex_shader_program = 0;
+  program->fragment_shader_program = 0;
   program->flags |= (SHADER_DIRTY | SHADER_MISS_VERTEX_SHADER | SHADER_MISS_FRAGMENT_SHADER);
-  program->vertex_shader_string = (char*)vertex_shader;
+  program->vertex_shader_string = vertex_shader;
   program->vertex_shader_length = strlen(vertex_shader);
-  program->fragment_shader_string = (char*)fragment_shader;
-  program->vertex_shader_length = strlen(fragment_shader);
+  program->fragment_shader_string = fragment_shader;
+  program->fragment_shader_length = strlen(fragment_shader);
   program->compile_vertex_shader = compile_vertex_shader;
   program->compile_fragment_shader = compile_fragment_shader;
   program->link_shaders = link_shaders;

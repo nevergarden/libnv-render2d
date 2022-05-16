@@ -3,10 +3,10 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 #include "nv_render2d_types.h"
 
-void nv_transform2d(nv_mesh2d_t * meshes, size_t mesh_count, GLuint * vbo) {
-  glad_glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+void nv_transform2d(nv_mesh2d_t * meshes, size_t mesh_count) {
   float cos_tetha = 0;
   float sin_tetha = 0;
   for (int p = 0; p < mesh_count; p++) {
@@ -22,7 +22,7 @@ void nv_transform2d(nv_mesh2d_t * meshes, size_t mesh_count, GLuint * vbo) {
           mesh.scale.x + mesh.position.x, mesh.scale.y + mesh.position.y,
           mesh.scale.x + mesh.position.x, -mesh.scale.y + mesh.position.y,
       };
-      glad_glBufferSubData(GL_ARRAY_BUFFER, p*sizeof(vec), sizeof(vec), &vec);
+      memcpy(mesh.triangles, vec, sizeof(vec));
     }
   }
 }

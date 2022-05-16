@@ -14,6 +14,7 @@ typedef struct nv_mesh2d_s {
   nv_fpoint2d_t position;
   nv_fpoint2d_t scale;
   float rotation;
+  float * triangles;
 } nv_mesh2d_t;
 
 // NV SHADER ------------------------
@@ -26,9 +27,9 @@ typedef enum nv_gl_shader_flags_s {
 
 typedef struct nv_gl_render2d_program_s {
   // Shader Data
-  char * vertex_shader_string;
+  const char * vertex_shader_string;
   size_t vertex_shader_length;
-  char * fragment_shader_string;
+  const char * fragment_shader_string;
   size_t fragment_shader_length;
 
   // Shader Program
